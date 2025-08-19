@@ -1,0 +1,16 @@
+
+<!-- Assets/UI/Screens/DashboardView.uxml -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="dashboard">
+    <ui:VisualElement class="row kpi-row">
+      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiBalance" />
+      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiIncome" />
+      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiExpenses" />
+      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiSavings" />
+    </ui:VisualElement>
+    <ui:VisualElement class="row">
+      <ui:Instance template="project://database/Assets/UI/Components/ChartCard.uxml" name="CashflowChart" />
+      <ui:Instance template="project://database/Assets/UI/Components/ChartCard.uxml" name="BudgetDonut" />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

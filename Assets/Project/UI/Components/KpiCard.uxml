@@ -1,0 +1,9 @@
+
+<!-- Assets/UI/Components/KpiCard.uxml -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="card kpi">
+    <ui:Label class="kpi__title" text="Заголовок" />
+    <ui:Label class="kpi__value" text="123 456 ₽" />
+    <ui:Label class="kpi__delta" text="▲ +4,2%" />
+  </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,17 @@
+
+<!-- Assets/UI/Components/Sidebar.uxml -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="sidebar">
+    <ui:Label class="sidebar__title" text="Finance Planner"/>
+    <ui:Button text="📊 Дашборд" class="nav-item is-active" name="NavDashboard"/>
+    <ui:Button text="🗓 Планер" class="nav-item" name="NavPlanner"/>
+    <ui:Button text="💸 Бюджеты" class="nav-item" name="NavBudgets"/>
+    <ui:Button text="📅 Платежи" class="nav-item" name="NavPayments"/>
+    <ui:Button text="🔮 Прогноз" class="nav-item" name="NavForecast"/>
+    <ui:Button text="🎯 Цели" class="nav-item" name="NavGoals"/>
+    <ui:Button text="💳 Долги" class="nav-item" name="NavDebts"/>
+    <ui:Button text="📊 Отчёты" class="nav-item" name="NavReports"/>
+    <ui:Button text="🧰 Инструменты" class="nav-item" name="NavTools"/>
+    <ui:Button text="⚙ Настройки" class="nav-item" name="NavSettings"/>
+  </ui:VisualElement>
+</ui:UXML>

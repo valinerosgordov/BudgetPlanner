@@ -1,0 +1,8 @@
+
+<!-- Assets/UI/Components/ChartCard.uxml -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="card chart chart-6">
+    <ui:Label class="card__title" text="График"/>
+    <ui:VisualElement name="ChartContent" class="chart__body" />
+  </ui:VisualElement>
+</ui:UXML>

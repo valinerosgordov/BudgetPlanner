@@ -1,0 +1,11 @@
+
+<!-- Assets/UI/Components/Topbar.uxml -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="topbar">
+    <ui:Label class="topbar__brand" text="Finance Planner" />
+    <ui:TextField class="topbar__search" name="GlobalSearch" label="Поиск (Ctrl/Cmd+K)" />
+    <ui:Button class="topbar__btn" name="AddBtn" text="＋" />
+    <ui:Button name="RatesBtn" text="Курсы" />
+    <ui:Button name="ProfileBtn" text="Профиль" />
+  </ui:VisualElement>
+</ui:UXML>

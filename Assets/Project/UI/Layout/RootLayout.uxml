@@ -1,0 +1,63 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Project/UI/Layout/RootLayout.uss?fileID=7433441132597879392&amp;guid=f4b664459129de24f9451c6036c31412&amp;type=3#RootLayout" />
+    <ui:VisualElement name="Root" class="root">
+        <ui:VisualElement class="topbar">
+            <ui:Label text="Finance Planner" class="topbar__brand" style="-unity-text-align: middle-center; width: 315px;" />
+            <ui:TextField name="GlobalSearch" class="topbar__search" style="width: 209px;" />
+            <ui:Button name="AddBtn" text="＋" class="topbar__btn" />
+            <ui:Button name="RatesBtn" text="Курсы" />
+            <ui:Button name="ProfileBtn" text="Профиль" />
+        </ui:VisualElement>
+        <ui:VisualElement class="body">
+            <ui:VisualElement class="sidebar">
+                <ui:Label text="Finance Planner" class="sidebar__title" />
+                <ui:Button text="📊 Дашборд" name="NavDashboard" class="nav-item is-active" />
+                <ui:Button text="🗓 Планер" name="NavPlanner" class="nav-item" />
+                <ui:Button text="💸 Бюджеты" name="NavBudgets" class="nav-item" />
+                <ui:Button text="📅 Платежи" name="NavPayments" class="nav-item" />
+                <ui:Button text="🔮 Прогноз" name="NavForecast" class="nav-item" />
+                <ui:Button text="🎯 Цели" name="NavGoals" class="nav-item" />
+                <ui:Button text="💳 Долги" name="NavDebts" class="nav-item" />
+                <ui:Button text="📊 Отчёты" name="NavReports" class="nav-item" />
+                <ui:Button text="🧰 Инструменты" name="NavTools" class="nav-item" />
+                <ui:Button text="⚙ Настройки" name="NavSettings" class="nav-item" />
+            </ui:VisualElement>
+            <ui:ScrollView name="Content" class="content">
+                <ui:VisualElement class="dashboard">
+                    <ui:VisualElement class="row kpi-row">
+                        <ui:VisualElement class="card kpi">
+                            <ui:Label text="Баланс" class="kpi__title" />
+                            <ui:Label name="KpiBalanceValue" text="123 456 ₽" class="kpi__value" />
+                            <ui:Label name="KpiBalanceDelta" text="▲ +4,2%" class="kpi__delta" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="card kpi">
+                            <ui:Label text="Доход MTD" class="kpi__title" />
+                            <ui:Label name="KpiIncomeValue" text="42 100 ₽" class="kpi__value" />
+                            <ui:Label name="KpiIncomeDelta" text="▲ +3,1%" class="kpi__delta" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="card kpi">
+                            <ui:Label text="Расход MTD" class="kpi__title" />
+                            <ui:Label name="KpiExpenseValue" text="28 340 ₽" class="kpi__value" />
+                            <ui:Label name="KpiExpenseDelta" text="▼ −1,8%" class="kpi__delta" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="card kpi">
+                            <ui:Label text="Сбережения" class="kpi__title" />
+                            <ui:Label name="KpiSavingsValue" text="8 900 ₽" class="kpi__value" />
+                            <ui:Label name="KpiSavingsDelta" text="▲ +12%" class="kpi__delta" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="row">
+                        <ui:VisualElement class="card chart chart-6">
+                            <ui:Label text="Budgets (mock)" class="card__title" />
+                            <ui:VisualElement name="Chart2" class="chart__body" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="card chart chart-6">
+                            <ui:Label text="Cashflow (mock)" class="card__title" />
+                            <ui:VisualElement name="Chart1" class="chart__body" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
