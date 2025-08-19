@@ -10,18 +10,59 @@
         </ui:VisualElement>
         <ui:VisualElement class="body">
             <ui:VisualElement class="sidebar">
-                <ui:Label text="Finance Planner" class="sidebar__title" />
-                <ui:Button text="📊 Дашборд" name="NavDashboard" class="nav-item is-active" />
-                <ui:Button text="🗓 Планер" name="NavPlanner" class="nav-item" />
-                <ui:Button text="💸 Бюджеты" name="NavBudgets" class="nav-item" />
-                <ui:Button text="📅 Платежи" name="NavPayments" class="nav-item" />
-                <ui:Button text="🔮 Прогноз" name="NavForecast" class="nav-item" />
-                <ui:Button text="🎯 Цели" name="NavGoals" class="nav-item" />
-                <ui:Button text="💳 Долги" name="NavDebts" class="nav-item" />
-                <ui:Button text="📊 Отчёты" name="NavReports" class="nav-item" />
-                <ui:Button text="🧰 Инструменты" name="NavTools" class="nav-item" />
-                <ui:Button text="⚙ Настройки" name="NavSettings" class="nav-item" />
-            </ui:VisualElement>
+  <ui:Label class="sidebar__title" text="Finance Planner"/>
+
+  <ui:Button class="nav-item is-active" name="NavDashboard">
+    <ui:VisualElement class="nav-icon nav-icon--dashboard" name="IconDashboard"/>
+    <ui:Label class="nav-label" text="Дашборд"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavPlanner">
+    <ui:VisualElement class="nav-icon nav-icon--planner" name="IconPlanner"/>
+    <ui:Label class="nav-label" text="Планер"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavBudgets">
+    <ui:VisualElement class="nav-icon nav-icon--budgets" name="IconBudgets"/>
+    <ui:Label class="nav-label" text="Бюджеты"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavPayments">
+    <ui:VisualElement class="nav-icon nav-icon--payments" name="IconPayments"/>
+    <ui:Label class="nav-label" text="Платежи"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavForecast">
+    <ui:VisualElement class="nav-icon nav-icon--forecast" name="IconForecast"/>
+    <ui:Label class="nav-label" text="Прогноз"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavGoals">
+    <ui:VisualElement class="nav-icon nav-icon--goals" name="IconGoals"/>
+    <ui:Label class="nav-label" text="Цели"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavDebts">
+    <ui:VisualElement class="nav-icon nav-icon--debts" name="IconDebts"/>
+    <ui:Label class="nav-label" text="Долги"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavReports">
+    <ui:VisualElement class="nav-icon nav-icon--reports" name="IconReports"/>
+    <ui:Label class="nav-label" text="Отчёты"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavTools">
+    <ui:VisualElement class="nav-icon nav-icon--tools" name="IconTools"/>
+    <ui:Label class="nav-label" text="Инструменты"/>
+  </ui:Button>
+
+  <ui:Button class="nav-item" name="NavSettings">
+    <ui:VisualElement class="nav-icon nav-icon--settings" name="IconSettings"/>
+    <ui:Label class="nav-label" text="Настройки"/>
+  </ui:Button>
+</ui:VisualElement>
+
             <ui:ScrollView name="Content" class="content">
                 <ui:VisualElement class="dashboard">
                     <ui:VisualElement class="row kpi-row">
@@ -54,6 +95,7 @@
                         <ui:VisualElement class="card chart chart-6">
                             <ui:Label text="Cashflow (mock)" class="card__title" />
                             <ui:VisualElement name="Chart1" class="chart__body" />
+                            <ui:VisualElement name="ModalHost" class="modal-host"/>
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>

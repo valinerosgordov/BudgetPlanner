@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NavigationController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     public UIDocument uiDocument;
 

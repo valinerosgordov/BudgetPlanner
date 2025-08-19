@@ -158,3 +158,76 @@
   padding-left: 10px; padding-right: 10px;
 }
 .topbar .unity-button__text { color: #0E0A1E; }
+/* Контент кнопки — горизонтальный ряд */
+.nav-item { display:flex; flex-direction:row; align-items:center; }
+
+/* Иконка слева */
+.nav-icon {
+  width:20px; height:20px; margin-right:10px;
+  -unity-background-scale-mode: scale-to-fit;
+  /* временный плейсхолдер (видно сразу, пока не подгрузили картинки) */
+  background-color:#7C4DFF;
+  border-top-left-radius:6px; border-top-right-radius:6px;
+  border-bottom-left-radius:6px; border-bottom-right-radius:6px;
+}
+
+/* Текст */
+.nav-label { color:#C8BEFF; -unity-text-align: middle-left; }
+
+/* Активная */
+.nav-item.is-active { background-color:#7C4DFF; }
+.nav-item.is-active .nav-label { color:#0E0A1E; }
+.nav-item.is-active .nav-icon { background-color:#0E0A1E; }
+
+/* Привязка реальных иконок из Resources (см. шаг 3) */
+.nav-icon--dashboard { -unity-background-image: resource("icons/dashboard"); }
+.nav-icon--planner   { -unity-background-image: resource("icons/calendar"); }
+.nav-icon--budgets   { -unity-background-image: resource("icons/wallet"); }
+.nav-icon--payments  { -unity-background-image: resource("icons/bills"); }
+.nav-icon--forecast  { -unity-background-image: resource("icons/forecast"); }
+.nav-icon--goals     { -unity-background-image: resource("icons/goals"); }
+.nav-icon--debts     { -unity-background-image: resource("icons/debts"); }
+.nav-icon--reports   { -unity-background-image: resource("icons/reports"); }
+.nav-icon--tools     { -unity-background-image: resource("icons/tools"); }
+.nav-icon--settings  { -unity-background-image: resource("icons/settings"); }
+/* Иконка по умолчанию — светлая на тёмном фоне */
+.nav-icon {
+  width:20px; height:20px; margin-right:10px;
+  -unity-background-scale-mode: scale-to-fit;
+  -unity-background-image-tint-color: #C8BEFF; /* цвет контура SVG/PNG */
+  background-color: rgba(0,0,0,0);             /* убираем фоновый квадратик */
+}
+
+/* Активный пункт — тёмный контур на фиолетовой «таблетке» */
+.nav-item.is-active .nav-icon {
+  -unity-background-image-tint-color: #0E0A1E;
+}
+.modal-host {
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  display: none;
+}
+.modal-host.is-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.35);
+}
+.modal {
+  width: 480px;
+  background-color: #1B1438;
+  border-left-width:1px; border-left-color:#2A2048;
+  border-right-width:1px; border-right-color:#2A2048;
+  border-top-width:1px; border-top-color:#2A2048;
+  border-bottom-width:1px; border-bottom-color:#2A2048;
+  border-top-left-radius:16px; border-top-right-radius:16px;
+  border-bottom-left-radius:16px; border-bottom-right-radius:16px;
+  padding:16px;
+}
+.modal__row { display:flex; flex-direction:row; margin-bottom:10px; }
+.modal__row > * { margin-right:12px; }
+.modal__title { -unity-font-style:bold; font-size:16px; margin-bottom:8px; color:#EDE9FF; }
+.modal__hint { color:#C8BEFF; font-size:12px; }
+.modal__actions { display:flex; flex-direction:row; justify-content:flex-end; margin-top:12px; }
+.modal__btn { background-color:#7C4DFF; color:#0E0A1E; border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px; padding-left:10px; padding-right:10px; height:30px; }
+.modal__btn--ghost { background-color:#201748; color:#C8BEFF; }

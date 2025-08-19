@@ -1,16 +1,37 @@
-
-<!-- Assets/UI/Screens/DashboardView.uxml -->
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements">
   <ui:VisualElement class="dashboard">
     <ui:VisualElement class="row kpi-row">
-      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiBalance" />
-      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiIncome" />
-      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiExpenses" />
-      <ui:Instance template="project://database/Assets/UI/Components/KpiCard.uxml" name="KpiSavings" />
+      <ui:VisualElement class="card kpi">
+        <ui:Label class="kpi__title" text="Баланс"/>
+        <ui:Label class="kpi__value" name="KpiBalanceValue" text="123 456 ₽"/>
+        <ui:Label class="kpi__delta" name="KpiBalanceDelta" text="▲ +4,2%"/>
+      </ui:VisualElement>
+      <ui:VisualElement class="card kpi">
+        <ui:Label class="kpi__title" text="Доход MTD"/>
+        <ui:Label class="kpi__value" name="KpiIncomeValue" text="42 100 ₽"/>
+        <ui:Label class="kpi__delta" name="KpiIncomeDelta" text="▲ +3,1%"/>
+      </ui:VisualElement>
+      <ui:VisualElement class="card kpi">
+        <ui:Label class="kpi__title" text="Расход MTD"/>
+        <ui:Label class="kpi__value" name="KpiExpenseValue" text="28 340 ₽"/>
+        <ui:Label class="kpi__delta" name="KpiExpenseDelta" text="▼ −1,8%"/>
+      </ui:VisualElement>
+      <ui:VisualElement class="card kpi">
+        <ui:Label class="kpi__title" text="Сбережения"/>
+        <ui:Label class="kpi__value" name="KpiSavingsValue" text="8 900 ₽"/>
+        <ui:Label class="kpi__delta" name="KpiSavingsDelta" text="▲ +12%"/>
+      </ui:VisualElement>
     </ui:VisualElement>
+
     <ui:VisualElement class="row">
-      <ui:Instance template="project://database/Assets/UI/Components/ChartCard.uxml" name="CashflowChart" />
-      <ui:Instance template="project://database/Assets/UI/Components/ChartCard.uxml" name="BudgetDonut" />
+      <ui:VisualElement class="card chart" style="flex-grow:1;">
+        <ui:Label class="card__title" text="Cashflow (mock)"/>
+        <ui:VisualElement class="chart__body"/>
+      </ui:VisualElement>
+      <ui:VisualElement class="card chart" style="flex-grow:1;">
+        <ui:Label class="card__title" text="Budgets (mock)"/>
+        <ui:VisualElement class="chart__body"/>
+      </ui:VisualElement>
     </ui:VisualElement>
   </ui:VisualElement>
 </ui:UXML>

@@ -1,89 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
+﻿using System.Globalization;
 using UnityEngine;
 using UnityEngine.UIElements;
+using FinancePlanner.Data;
 
-public class DashboardPresenter : MonoBehaviour
+namespace FinancePlanner.UI
 {
-    [SerializeField] private UIDocument uiDocument;
-    [SerializeField] private string baseCurrency = "RUB"; // базовая валюта отчётов
-
-    // Пример простой модели транзакций (замени на свой репозиторий)
-    [Serializable]
-    public class Tx
+    public class DashboardPresenter : MonoBehaviour
     {
-        public DateTime At;
-        public decimal Amount; // >0 доход, <0 расход
-        public string Currency; // для MVP игнорируем конвертацию
-    }
+        [SerializeField] private UIDocument ui;
+        [SerializeField] private DataStore data;
 
-    // Временные данные пользователя (подменишь на БД)
-    [SerializeField]
-    private List<Tx> demoTransactions = new List<Tx>
-    {
-        new Tx{ At = DateTime.Today.AddDays(-2), Amount = 42000m, Currency = "RUB"},
-        new Tx{ At = DateTime.Today.AddDays(-1), Amount = -18340m, Currency = "RUB"},
-        new Tx{ At = DateTime.Today.AddDays(-1), Amount = -5200m, Currency = "RUB"},
-        new Tx{ At = DateTime.Today, Amount = -3800m, Currency = "RUB"},
-        new Tx{ At = DateTime.Today, Amount = 8900m, Currency = "RUB"}, // как перевод в сбережения
-    };
+        Label kpiBalance, kpiBalanceDelta;
+        Label kpiIncome, kpiIncomeDelta;
+        Label kpiExpense, kpiExpenseDelta;
+        Label kpiSavings, kpiSavingsDelta;
 
-    Label kpiBalance, kpiBalanceDelta;
-    Label kpiIncome, kpiIncomeDelta;
-    Label kpiExpense, kpiExpenseDelta;
-    Label kpiSavings, kpiSavingsDelta;
+        CultureInfo ru = new CultureInfo("ru-RU");
 
-    CultureInfo ru = new CultureInfo("ru-RU");
-
-    void Awake()
-    {
-        if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
-        var root = uiDocument.rootVisualElement;
-
-        kpiBalance = root.Q<Label>("KpiBalanceValue");
-        kpiBalanceDelta = root.Q<Label>("KpiBalanceDelta");
-        kpiIncome = root.Q<Label>("KpiIncomeValue");
-        kpiIncomeDelta = root.Q<Label>("KpiIncomeDelta");
-        kpiExpense = root.Q<Label>("KpiExpenseValue");
-        kpiExpenseDelta = root.Q<Label>("KpiExpenseDelta");
-        kpiSavings = root.Q<Label>("KpiSavingsValue");
-        kpiSavingsDelta = root.Q<Label>("KpiSavingsDelta");
-
-        RefreshKpi();
-    }
-
-    void RefreshKpi()
-    {
-        var monthStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-        decimal incomeMtd = 0, expenseMtd = 0, savingsMtd = 0;
-
-        foreach (var t in demoTransactions)
+        void OnEnable()
         {
-            if (t.At < monthStart) continue;
-            if (t.Amount > 0) incomeMtd += t.Amount;
-            if (t.Amount < 0) expenseMtd += -t.Amount;
+            if (ui == null) ui = GetComponent<UIDocument>();
+            Hook();
+            if (data != null) data.OnChanged += Refresh;
+            Refresh();
         }
 
-        // Допустим, всё, что помечено как «сбережения», мы бы знали по категории; тут просто пример:
-        savingsMtd = 8900m;
+        void OnDisable()
+        {
+            if (data != null) data.OnChanged -= Refresh;
+        }
 
-        decimal startingBalance = 100000m; // возьми из сумм по счетам
-        decimal balanceNow = startingBalance + incomeMtd - expenseMtd;
+        void Hook()
+        {
+            var root = ui.rootVisualElement;
+            kpiBalance = root.Q<Label>("KpiBalanceValue");
+            kpiBalanceDelta = root.Q<Label>("KpiBalanceDelta");
+            kpiIncome = root.Q<Label>("KpiIncomeValue");
+            kpiIncomeDelta = root.Q<Label>("KpiIncomeDelta");
+            kpiExpense = root.Q<Label>("KpiExpenseValue");
+            kpiExpenseDelta = root.Q<Label>("KpiExpenseDelta");
+            kpiSavings = root.Q<Label>("KpiSavingsValue");
+            kpiSavingsDelta = root.Q<Label>("KpiSavingsDelta");
+        }
 
-        // Форматирование
-        string fmt(decimal v) => string.Format(ru, "{0:N0} ₽", v);
+        string FmtLong(long cents) => string.Format(ru, "{0:N0} ₽", cents / 100m);
 
-        kpiIncome.text = fmt(incomeMtd);
-        kpiExpense.text = fmt(expenseMtd);
-        kpiSavings.text = fmt(savingsMtd);
-        kpiBalance.text = fmt(balanceNow);
+        void Refresh()
+        {
+            if (data == null) return;
+            var agg = data.GetMonthAgg(System.DateTime.Today);
+            kpiIncome.text = FmtLong(agg.income);
+            kpiExpense.text = FmtLong(agg.expense);
+            kpiSavings.text = FmtLong(agg.savings);
+            kpiBalance.text = FmtLong(agg.balanceNow);
 
-        // Дельты для примера: сравнение с прошлым месяцем (заглушка)
-        kpiIncomeDelta.text = "▲ +3,1%";
-        kpiExpenseDelta.text = "▼ −1,8%";
-        kpiSavingsDelta.text = "▲ +12%";
-        kpiBalanceDelta.text = "▲ +4,2%";
+            // временные заглушки дельт
+            kpiIncomeDelta.text = "▲ +3,1%";
+            kpiExpenseDelta.text = "▼ −1,8%";
+            kpiSavingsDelta.text = "▲ +12%";
+            kpiBalanceDelta.text = "▲ +4,2%";
+        }
     }
 }

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="dashboard">
+    <ui:VisualElement class="row">
+      <ui:VisualElement class="card" style="flex-grow:1;">
+        <ui:Label class="card__title" text="Планер (календарь денег)"/>
+        <ui:VisualElement style="height:280px;background-color:#201748;border-top-left-radius:12px;border-top-right-radius:12px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

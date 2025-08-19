@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement class="modal">
+    <ui:Label class="modal__title" text="Новая транзакция"/>
+
+    <ui:VisualElement class="modal__row">
+      <ui:DropdownField name="TypeField" choices="Доход,Расход" value="Расход" />
+      <ui:TextField name="AmountField" label="Сумма" />
+      <ui:DropdownField name="CurrencyField" choices="RUB,USD,EUR" value="RUB" />
+    </ui:VisualElement>
+
+    <ui:VisualElement class="modal__row">
+      <ui:TextField name="CategoryField" label="Категория" />
+      <ui:TextField name="DateField" label="Дата (YYYY-MM-DD)" />
+    </ui:VisualElement>
+
+    <ui:TextField name="NoteField" label="Комментарий" multiline="true" />
+
+    <ui:Label class="modal__hint" text="Подсказка: отрицательные суммы не нужны — типом выбираем доход/расход." />
+    <ui:VisualElement class="modal__actions">
+      <ui:Button class="modal__btn modal__btn--ghost" name="CancelBtn" text="Отмена"/>
+      <ui:Button class="modal__btn" name="SaveBtn" text="Сохранить"/>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>
