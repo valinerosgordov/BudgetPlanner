@@ -267,6 +267,9 @@ GameObject:
   - component: {fileID: 606684959}
   - component: {fileID: 606684958}
   - component: {fileID: 606684960}
+  - component: {fileID: 606684962}
+  - component: {fileID: 606684963}
+  - component: {fileID: 606684964}
   m_Layer: 0
   m_Name: UIDocument
   m_TagString: Untagged
@@ -325,7 +328,52 @@ MonoBehaviour:
   plannerView: {fileID: 9197481963319205126, guid: 23d6813ee41a1bb448acc57e9d00b949, type: 3}
   budgetsView: {fileID: 9197481963319205126, guid: 4caf3e72064ca094f85f6f4aa4f89bab, type: 3}
   paymentsView: {fileID: 9197481963319205126, guid: 8e9274fed98f2dd4f963550ffe189458, type: 3}
---- !u!1 &1283714778
+--- !u!114 &606684962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606684957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df197201f32e314b9494232900e939c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 606684958}
+  data: {fileID: 11400000, guid: 9a90b188e6db527438c0a76176221e25, type: 2}
+--- !u!114 &606684963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606684957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3363cf770485154cb0089bab15143f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 606684958}
+  data: {fileID: 11400000, guid: 9a90b188e6db527438c0a76176221e25, type: 2}
+  plannerRow: {fileID: 9197481963319205126, guid: e98c44ac7a0b1904ab2c65bc0e1d723d, type: 3}
+  newTx: {fileID: 606684964}
+--- !u!114 &606684964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606684957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa3082a9d3ec2045b21987111266dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 606684958}
+  newTxModal: {fileID: 9197481963319205126, guid: fff01270463b5f945b1ee8c01e04d618, type: 3}
+  data: {fileID: 11400000, guid: 9a90b188e6db527438c0a76176221e25, type: 2}
+--- !u!1 &2101033542
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,118 +381,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1283714781}
-  - component: {fileID: 1283714780}
-  - component: {fileID: 1283714779}
+  - component: {fileID: 2101033544}
+  - component: {fileID: 2101033543}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1283714779
+--- !u!114 &2101033543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283714778}
+  m_GameObject: {fileID: 2101033542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 76700247731a8654bae77883c43f814b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
---- !u!114 &1283714780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283714778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1283714781
+  data: {fileID: 11400000, guid: 9a90b188e6db527438c0a76176221e25, type: 2}
+  filename: finance_data.json
+--- !u!4 &2101033544
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283714778}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1546190727
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1546190729}
-  - component: {fileID: 1546190728}
-  m_Layer: 0
-  m_Name: UIController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1546190728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546190727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9513c9a8265f74c96cd5127ca008ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDocument: {fileID: 606684958}
-  dashboardUxml: {fileID: 9197481963319205126, guid: 6b7afcd20ccd24945868fd6b2319f498, type: 3}
-  plannerUxml: {fileID: 0}
-  budgetsUxml: {fileID: 0}
-  paymentsUxml: {fileID: 0}
---- !u!4 &1546190729
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546190727}
+  m_GameObject: {fileID: 2101033542}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -459,5 +425,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 606684959}
-  - {fileID: 1546190729}
-  - {fileID: 1283714781}
+  - {fileID: 2101033544}

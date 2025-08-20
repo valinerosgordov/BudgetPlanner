@@ -42,5 +42,24 @@ namespace FinancePlanner.Data
             long balanceNow = OpeningBalanceCents + inc - exp;
             return (inc, exp, savings, balanceNow);
         }
+        public void UpdateTx(Tx tx)
+        {
+            var i = transactions.FindIndex(t => t.id == tx.id);
+            if (i >= 0)
+            {
+                transactions[i] = tx;
+                OnChanged?.Invoke();
+            }
+        }
+
+        public void RemoveTx(string id)
+        {
+            var i = transactions.FindIndex(t => t.id == id);
+            if (i >= 0)
+            {
+                transactions.RemoveAt(i);
+                OnChanged?.Invoke();
+            }
+        }
     }
 }

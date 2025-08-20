@@ -1,105 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Project/UI/Layout/RootLayout.uss?fileID=7433441132597879392&amp;guid=f4b664459129de24f9451c6036c31412&amp;type=3#RootLayout" />
-    <ui:VisualElement name="Root" class="root">
-        <ui:VisualElement class="topbar">
-            <ui:Label text="Finance Planner" class="topbar__brand" style="-unity-text-align: middle-center; width: 315px;" />
-            <ui:TextField name="GlobalSearch" class="topbar__search" style="width: 209px;" />
-            <ui:Button name="AddBtn" text="＋" class="topbar__btn" />
-            <ui:Button name="RatesBtn" text="Курсы" />
-            <ui:Button name="ProfileBtn" text="Профиль" />
-        </ui:VisualElement>
-        <ui:VisualElement class="body">
-            <ui:VisualElement class="sidebar">
-  <ui:Label class="sidebar__title" text="Finance Planner"/>
+  <Style src="RootLayout.uss" />
 
-  <ui:Button class="nav-item is-active" name="NavDashboard">
-    <ui:VisualElement class="nav-icon nav-icon--dashboard" name="IconDashboard"/>
-    <ui:Label class="nav-label" text="Дашборд"/>
-  </ui:Button>
+  <ui:VisualElement name="Root" class="root">
 
-  <ui:Button class="nav-item" name="NavPlanner">
-    <ui:VisualElement class="nav-icon nav-icon--planner" name="IconPlanner"/>
-    <ui:Label class="nav-label" text="Планер"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavBudgets">
-    <ui:VisualElement class="nav-icon nav-icon--budgets" name="IconBudgets"/>
-    <ui:Label class="nav-label" text="Бюджеты"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavPayments">
-    <ui:VisualElement class="nav-icon nav-icon--payments" name="IconPayments"/>
-    <ui:Label class="nav-label" text="Платежи"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavForecast">
-    <ui:VisualElement class="nav-icon nav-icon--forecast" name="IconForecast"/>
-    <ui:Label class="nav-label" text="Прогноз"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavGoals">
-    <ui:VisualElement class="nav-icon nav-icon--goals" name="IconGoals"/>
-    <ui:Label class="nav-label" text="Цели"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavDebts">
-    <ui:VisualElement class="nav-icon nav-icon--debts" name="IconDebts"/>
-    <ui:Label class="nav-label" text="Долги"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavReports">
-    <ui:VisualElement class="nav-icon nav-icon--reports" name="IconReports"/>
-    <ui:Label class="nav-label" text="Отчёты"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavTools">
-    <ui:VisualElement class="nav-icon nav-icon--tools" name="IconTools"/>
-    <ui:Label class="nav-label" text="Инструменты"/>
-  </ui:Button>
-
-  <ui:Button class="nav-item" name="NavSettings">
-    <ui:VisualElement class="nav-icon nav-icon--settings" name="IconSettings"/>
-    <ui:Label class="nav-label" text="Настройки"/>
-  </ui:Button>
-</ui:VisualElement>
-
-            <ui:ScrollView name="Content" class="content">
-                <ui:VisualElement class="dashboard">
-                    <ui:VisualElement class="row kpi-row">
-                        <ui:VisualElement class="card kpi">
-                            <ui:Label text="Баланс" class="kpi__title" />
-                            <ui:Label name="KpiBalanceValue" text="123 456 ₽" class="kpi__value" />
-                            <ui:Label name="KpiBalanceDelta" text="▲ +4,2%" class="kpi__delta" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="card kpi">
-                            <ui:Label text="Доход MTD" class="kpi__title" />
-                            <ui:Label name="KpiIncomeValue" text="42 100 ₽" class="kpi__value" />
-                            <ui:Label name="KpiIncomeDelta" text="▲ +3,1%" class="kpi__delta" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="card kpi">
-                            <ui:Label text="Расход MTD" class="kpi__title" />
-                            <ui:Label name="KpiExpenseValue" text="28 340 ₽" class="kpi__value" />
-                            <ui:Label name="KpiExpenseDelta" text="▼ −1,8%" class="kpi__delta" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="card kpi">
-                            <ui:Label text="Сбережения" class="kpi__title" />
-                            <ui:Label name="KpiSavingsValue" text="8 900 ₽" class="kpi__value" />
-                            <ui:Label name="KpiSavingsDelta" text="▲ +12%" class="kpi__delta" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement class="row">
-                        <ui:VisualElement class="card chart chart-6">
-                            <ui:Label text="Budgets (mock)" class="card__title" />
-                            <ui:VisualElement name="Chart2" class="chart__body" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="card chart chart-6">
-                            <ui:Label text="Cashflow (mock)" class="card__title" />
-                            <ui:VisualElement name="Chart1" class="chart__body" />
-                            <ui:VisualElement name="ModalHost" class="modal-host"/>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:ScrollView>
-        </ui:VisualElement>
+    <!-- TOPBAR -->
+    <ui:VisualElement class="topbar">
+      <ui:Label class="topbar__brand" text="Finance Planner" />
+      <ui:Button name="AddBtn" class="topbar__btn" text="＋" />
+      <ui:Button name="RatesBtn" text="Курсы" />
+      <ui:Button name="ProfileBtn" text="Профиль" />
     </ui:VisualElement>
+
+    <!-- BODY -->
+    <ui:VisualElement class="body">
+
+      <!-- SIDEBAR -->
+      <ui:VisualElement class="sidebar">
+        <ui:Label class="sidebar__title" text="Finance Planner"/>
+
+        <ui:Button class="nav-item is-active" name="NavDashboard">
+          <ui:VisualElement class="nav-icon nav-icon--dashboard" name="IconDashboard"/>
+          <ui:Label class="nav-label" text="Дашборд"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavPlanner">
+          <ui:VisualElement class="nav-icon nav-icon--planner" name="IconPlanner"/>
+          <ui:Label class="nav-label" text="Планер"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavBudgets">
+          <ui:VisualElement class="nav-icon nav-icon--budgets" name="IconBudgets"/>
+          <ui:Label class="nav-label" text="Бюджеты"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavPayments">
+          <ui:VisualElement class="nav-icon nav-icon--payments" name="IconPayments"/>
+          <ui:Label class="nav-label" text="Платежи"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavForecast">
+          <ui:VisualElement class="nav-icon nav-icon--forecast" name="IconForecast"/>
+          <ui:Label class="nav-label" text="Прогноз"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavGoals">
+          <ui:VisualElement class="nav-icon nav-icon--goals" name="IconGoals"/>
+          <ui:Label class="nav-label" text="Цели"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavDebts">
+          <ui:VisualElement class="nav-icon nav-icon--debts" name="IconDebts"/>
+          <ui:Label class="nav-label" text="Долги"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavReports">
+          <ui:VisualElement class="nav-icon nav-icon--reports" name="IconReports"/>
+          <ui:Label class="nav-label" text="Отчёты"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavTools">
+          <ui:VisualElement class="nav-icon nav-icon--tools" name="IconTools"/>
+          <ui:Label class="nav-label" text="Инструменты"/>
+        </ui:Button>
+
+        <ui:Button class="nav-item" name="NavSettings">
+          <ui:VisualElement class="nav-icon nav-icon--settings" name="IconSettings"/>
+          <ui:Label class="nav-label" text="Настройки"/>
+        </ui:Button>
+      </ui:VisualElement>
+
+      <!-- CONTENT -->
+      <ui:ScrollView
+        name="Content"
+        class="content"
+        mode="Vertical"
+        horizontal-scroller-visibility="Hidden"
+        vertical-scroller-visibility="Auto">
+
+        <!-- ОБЁРТКА ЭКРАНА -->
+        <ui:VisualElement class="dashboard">
+
+          <!-- KPI row -->
+          <ui:VisualElement class="row kpi-row">
+            <ui:VisualElement class="card kpi">
+              <ui:Label class="kpi__title" text="Баланс"/>
+              <ui:Label class="kpi__value" name="KpiBalanceValue" text="123 456 ₽"/>
+              <ui:Label class="kpi__delta" name="KpiBalanceDelta" text="▲ +4,2%"/>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="card kpi">
+              <ui:Label class="kpi__title" text="Доход MTD"/>
+              <ui:Label class="kpi__value" name="KpiIncomeValue" text="42 100 ₽"/>
+              <ui:Label class="kpi__delta" name="KpiIncomeDelta" text="▲ +3,1%"/>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="card kpi">
+              <ui:Label class="kpi__title" text="Расход MTD"/>
+              <ui:Label class="kpi__value" name="KpiExpenseValue" text="28 340 ₽"/>
+              <ui:Label class="kpi__delta" name="KpiExpenseDelta" text="▼ −1,8%"/>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="card kpi">
+              <ui:Label class="kpi__title" text="Сбережения"/>
+              <ui:Label class="kpi__value" name="KpiSavingsValue" text="8 900 ₽"/>
+              <ui:Label class="kpi__delta" name="KpiSavingsDelta" text="▲ +12%"/>
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+          <!-- Charts row -->
+          <ui:VisualElement class="row">
+            <ui:VisualElement class="card chart">
+              <ui:Label class="card__title" text="Cashflow (mock)"/>
+              <ui:VisualElement class="chart__body" name="Chart1"/>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="card chart">
+              <ui:Label class="card__title" text="Budgets (mock)"/>
+              <ui:VisualElement class="chart__body" name="Chart2"/>
+            </ui:VisualElement>
+          </ui:VisualElement>
+
+        </ui:VisualElement> <!-- /dashboard -->
+
+      </ui:ScrollView> <!-- ВАЖНО: закрываем именно ScrollView -->
+
+    </ui:VisualElement> <!-- /body -->
+
+    <!-- MODAL HOST (вне ScrollView) -->
+    <ui:VisualElement name="ModalHost" class="modal-host"/>
+
+  </ui:VisualElement> <!-- /Root -->
 </ui:UXML>

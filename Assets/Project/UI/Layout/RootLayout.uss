@@ -1,4 +1,4 @@
-﻿/* ==== CORE ==== */
+﻿/* ==== CORE =================================================== */
 .root {
   background-color: #0E0A1E;
   color: #EDE9FF;
@@ -8,214 +8,117 @@
   height: 100%;
 }
 
-/* TOPBAR */
+/* ==== TOPBAR ================================================= */
 .topbar {
   height: 64px;
   background-color: #140F2A;
-
-  /* вместо border-bottom: 1px solid #2A2048; */
   border-bottom-width: 1px;
   border-bottom-color: #2A2048;
-
   display: flex;
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
+  justify-content: flex-start;
 }
-.topbar__brand { color:#EDE9FF; -unity-font-style: bold; font-size:16px; }
-.topbar__search { flex-grow:1; margin-left:12px; margin-right:12px; }
+.topbar__brand { color:#EDE9FF; -unity-font-style: bold; font-size:16px; margin-right:16px; }
 .topbar__btn {
-  background-color: #7C4DFF;
-  color: #0E0A1E;
+  background-color: #7C4DFF; color:#0E0A1E;
   border-top-left-radius: 10px; border-top-right-radius: 10px;
   border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+  padding-left:10px; padding-right:10px;
 }
 
-/* BODY */
-.body { display:flex; flex-direction:row; flex-grow:1; }  /* без calc */
+/* ==== BODY / SIDEBAR ======================================== */
+.body { display:flex; flex-direction:row; flex-grow:1; }
 
-/* SIDEBAR */
 .sidebar {
   width: 260px;
   background-color: #140F2A;
-
-  /* вместо border-right: 1px solid #2A2048; */
-  border-right-width: 1px;
-  border-right-color: #2A2048;
-
+  border-right-width: 1px; border-right-color: #2A2048;
   padding: 16px;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
 }
 .sidebar__title { font-size:18px; -unity-font-style:bold; margin-bottom:16px; color:#7C4DFF; }
 
 .nav-item {
   background-color: rgba(0,0,0,0);
-  /* border: none нельзя, просто ширина = 0 */
-  border-left-width: 0px; border-right-width: 0px; border-top-width: 0px; border-bottom-width: 0px;
-
-  justify-content: flex-start;
-  color: #C8BEFF;
-  padding-left: 12px; padding-right: 12px; padding-top: 10px; padding-bottom: 10px;
-
-  /* вместо border-radius */
-  border-top-left-radius: 20px; border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
-
-  margin-bottom: 12px;
+  border-left-width:0; border-right-width:0; border-top-width:0; border-bottom-width:0;
+  justify-content:flex-start;
+  color:#C8BEFF;
+  padding:10px 12px;
+  border-top-left-radius:20px; border-top-right-radius:20px;
+  border-bottom-left-radius:20px; border-bottom-right-radius:20px;
+  margin-bottom:12px;
+  display:flex; flex-direction:row; align-items:center;
 }
-/* :hover лучше не использовать — оставим только активное состояние классом */
-.nav-item.is-active { background-color: #7C4DFF; color: #0E0A1E; }
+.nav-item.unity-button { width:100%; height:36px; background-color:#1B1438; }
+.nav-item.unity-button > .unity-button__text { color:#C8BEFF; -unity-text-align: middle-left; }
+.nav-item.is-active { background-color:#7C4DFF; color:#0E0A1E; }
+.nav-item.unity-button.is-active > .unity-button__text { color:#0E0A1E; }
 
-/* CONTENT */
-.content { flex-grow:1; padding:24px; /* overflow:auto -> не поддерживается */ }
+/* ==== CONTENT / GRID ======================================== */
+.content { flex-grow:1; padding:24px; }
 
-/* CARDS */
+.dashboard { display:flex; flex-direction:column; width:100%; }
+.row { display:flex; flex-direction:row; width:100%; }
+.row > * { margin-right:24px; }
+.kpi-row > .kpi, .kpi-row > .card { flex-grow:1; flex-shrink:1; }
+
 .card {
-  background-color: #1B1438;
-
-  /* вместо border: 1px solid #2A2048; */
-  border-left-width: 1px;  border-left-color:  #2A2048;
-  border-right-width: 1px; border-right-color: #2A2048;
-  border-top-width: 1px;   border-top-color:   #2A2048;
-  border-bottom-width: 1px; border-bottom-color:#2A2048;
-
-  /* вместо box-shadow */
-  border-top-left-radius: 24px; border-top-right-radius: 24px;
-  border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
-
-  padding: 16px;
+  background-color:#1B1438;
+  border-left-width:1px;  border-left-color:#2A2048;
+  border-right-width:1px; border-right-color:#2A2048;
+  border-top-width:1px;   border-top-color:#2A2048;
+  border-bottom-width:1px;border-bottom-color:#2A2048;
+  border-top-left-radius:24px; border-top-right-radius:24px;
+  border-bottom-left-radius:24px; border-bottom-right-radius:24px;
+  padding:16px;
 }
 .card__title { color:#C8BEFF; margin-bottom:8px; }
 
-/* KPI */
 .kpi__title { color:#C8BEFF; font-size:14px; }
 .kpi__value { font-size:22px; -unity-font-style:bold; color:#EDE9FF; }
 .kpi__delta { font-size:12px; color:#00C853; margin-top:4px; }
 
-/* ==== LAYOUT (FLEX, без псевдоклассов) ==== */
-.dashboard { display:flex; flex-direction:column; }
-.row { display:flex; flex-direction:row; }
+.kpi   { min-width:240px; margin-bottom:24px; }
+.chart { min-width:320px; }
 
-/* 4 KPI – равная ширина */
-.kpi-row > .kpi, .kpi-row > .card { flex-grow:1; flex-shrink:1; }
+/* ==== ScrollView: убираем горизонталь ======================== */
+#Content > .unity-scroll-view__content-container { width:100%; }
+#Content .unity-scroll-view__horizontal-scroller { display:none; }
 
-/* отступы между элементами ряда — простой и безопасный */
-.row > * { margin-right: 24px; }
-/* ─── Topbar правки ───────────────────────────────────────────── */
-.topbar { justify-content: flex-start; }
-.topbar__brand { -unity-text-align: middle-left; margin-right: 16px; }
-.topbar .unity-text-field__label { display: none; }   /* скрываем лейбл над полем */
-.topbar .unity-text-field__input {
-  height: 28px;
-  min-height: 28px;
-  background-color: #0E0A1E;
-  color: #EDE9FF;
-  padding-left: 8px; padding-right: 8px;
-  border-top-left-radius: 8px; border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
-}
-
-/* ─── Sidebar кнопки: переопределяем тему ─────────────────────── */
-.nav-item.unity-button {
-  width: 100%;
-  height: 36px;
-  background-color: #1B1438;            /* фон кнопки */
-  border-left-width: 0px; border-right-width: 0px; border-top-width: 0px; border-bottom-width: 0px;
-  border-top-left-radius: 20px; border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
-  justify-content: flex-start;          /* текст слева */
-  padding-left: 12px; padding-right: 12px;
-}
-.nav-item.unity-button > .unity-button__text {
-  color: #C8BEFF;                       /* текст обычной кнопки */
-  -unity-text-align: middle-left;
-}
-.nav-item.unity-button.is-active { background-color: #7C4DFF; }
-.nav-item.unity-button.is-active > .unity-button__text { color: #0E0A1E; }
-
-/* тонкая вертикальная линия справа от сайдбара уже есть border-right у .sidebar */
-
-/* ─── Ряды: расстояния между элементами без псевдоклассов ─────── */
-.row > * { margin-right: 24px; }
-
-/* 1) Растянуть контент внутри ScrollView в рантайме */
-#Content > .unity-scroll-view__content-container {
-  width: 100%;
-}
-#Content .dashboard { width: 100%; flex-grow: 1; }
-#Content .row { width: 100%; }
-
-/* Минимальные размеры, чтобы карточки не схлопывались */
-.kpi { min-width: 240px; margin-bottom: 24px; }
-.chart { min-width: 320px; }
-
-/* 2) Кнопки в топбаре — фиолетовые таблетки, как в макете */
-.topbar .unity-button {
-  background-color: #7C4DFF;
-  border-top-left-radius: 10px; border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
-  padding-left: 10px; padding-right: 10px;
-}
-.topbar .unity-button__text { color: #0E0A1E; }
-/* Контент кнопки — горизонтальный ряд */
-.nav-item { display:flex; flex-direction:row; align-items:center; }
-
-/* Иконка слева */
+/* ==== Sidebar icons ========================================= */
 .nav-icon {
   width:20px; height:20px; margin-right:10px;
   -unity-background-scale-mode: scale-to-fit;
-  /* временный плейсхолдер (видно сразу, пока не подгрузили картинки) */
-  background-color:#7C4DFF;
-  border-top-left-radius:6px; border-top-right-radius:6px;
-  border-bottom-left-radius:6px; border-bottom-right-radius:6px;
+  -unity-background-image-tint-color:#C8BEFF;
+  background-color: rgba(0,0,0,0);
 }
+.nav-item.is-active .nav-icon { -unity-background-image-tint-color:#0E0A1E; }
 
-/* Текст */
-.nav-label { color:#C8BEFF; -unity-text-align: middle-left; }
+/* важно: используем background-image */
+.nav-icon--dashboard { background-image: resource("icons/dashboard"); }
+.nav-icon--planner   { background-image: resource("icons/calendar");  }
+.nav-icon--budgets   { background-image: resource("icons/wallet");    }
+.nav-icon--payments  { background-image: resource("icons/bills");     }
+.nav-icon--forecast  { background-image: resource("icons/forecast");  }
+.nav-icon--goals     { background-image: resource("icons/goals");     }
+.nav-icon--debts     { background-image: resource("icons/debts");     }
+.nav-icon--reports   { background-image: resource("icons/reports");   }
+.nav-icon--tools     { background-image: resource("icons/tools");     }
+.nav-icon--settings  { background-image: resource("icons/settings");  }
 
-/* Активная */
-.nav-item.is-active { background-color:#7C4DFF; }
-.nav-item.is-active .nav-label { color:#0E0A1E; }
-.nav-item.is-active .nav-icon { background-color:#0E0A1E; }
-
-/* Привязка реальных иконок из Resources (см. шаг 3) */
-.nav-icon--dashboard { -unity-background-image: resource("icons/dashboard"); }
-.nav-icon--planner   { -unity-background-image: resource("icons/calendar"); }
-.nav-icon--budgets   { -unity-background-image: resource("icons/wallet"); }
-.nav-icon--payments  { -unity-background-image: resource("icons/bills"); }
-.nav-icon--forecast  { -unity-background-image: resource("icons/forecast"); }
-.nav-icon--goals     { -unity-background-image: resource("icons/goals"); }
-.nav-icon--debts     { -unity-background-image: resource("icons/debts"); }
-.nav-icon--reports   { -unity-background-image: resource("icons/reports"); }
-.nav-icon--tools     { -unity-background-image: resource("icons/tools"); }
-.nav-icon--settings  { -unity-background-image: resource("icons/settings"); }
-/* Иконка по умолчанию — светлая на тёмном фоне */
-.nav-icon {
-  width:20px; height:20px; margin-right:10px;
-  -unity-background-scale-mode: scale-to-fit;
-  -unity-background-image-tint-color: #C8BEFF; /* цвет контура SVG/PNG */
-  background-color: rgba(0,0,0,0);             /* убираем фоновый квадратик */
-}
-
-/* Активный пункт — тёмный контур на фиолетовой «таблетке» */
-.nav-item.is-active .nav-icon {
-  -unity-background-image-tint-color: #0E0A1E;
-}
+/* ==== Modal ================================================== */
 .modal-host {
-  position: absolute;
-  left: 0; right: 0; top: 0; bottom: 0;
-  display: none;
+  position:absolute; left:0; right:0; top:0; bottom:0;
+  display:none;
 }
 .modal-host.is-open {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display:flex; align-items:center; justify-content:center;
   background-color: rgba(0,0,0,0.35);
 }
 .modal {
-  width: 480px;
-  background-color: #1B1438;
+  width:480px; background-color:#1B1438;
   border-left-width:1px; border-left-color:#2A2048;
   border-right-width:1px; border-right-color:#2A2048;
   border-top-width:1px; border-top-color:#2A2048;
@@ -229,5 +132,36 @@
 .modal__title { -unity-font-style:bold; font-size:16px; margin-bottom:8px; color:#EDE9FF; }
 .modal__hint { color:#C8BEFF; font-size:12px; }
 .modal__actions { display:flex; flex-direction:row; justify-content:flex-end; margin-top:12px; }
-.modal__btn { background-color:#7C4DFF; color:#0E0A1E; border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px; padding-left:10px; padding-right:10px; height:30px; }
+.modal__btn { background-color:#7C4DFF; color:#0E0A1E; border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px; padding:0 10px; height:30px; }
 .modal__btn--ghost { background-color:#201748; color:#C8BEFF; }
+
+/* ==== Planner ================================================= */
+/* вместо gap используем margin-right у детей */
+.planner-header { display:flex; flex-direction:row; align-items:center; margin-bottom:8px; }
+.planner-header > * { margin-right:8px; }
+
+.planner-title { -unity-font-style:bold; font-size:16px; color:#EDE9FF; margin-left:4px; margin-right:auto; }
+
+.planner-nav   { width:28px; height:28px; background-color:#201748; color:#C8BEFF;
+  border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px; }
+
+.planner-totals { display:flex; flex-direction:row; color:#C8BEFF; }
+.planner-totals > * { margin-right:24px; }
+
+#PlannerList, .unity-list-view { width:100%; height:380px; }
+.planner-row { display:flex; flex-direction:row; align-items:center; padding:8px 6px; border-bottom-width:1px; border-bottom-color:#2A2048; }
+.planner-col { color:#EDE9FF; }
+.planner-col--date   { width:100px; color:#C8BEFF; }
+.planner-col--type   { width:70px;  color:#C8BEFF; }
+.planner-col--text   { flex-grow:1; }
+.planner-col--amount { width:120px; -unity-text-align: middle-right; }
+
+.planner-actions { display:flex; flex-direction:row; margin-left:8px; }
+.planner-actions > * { margin-right:6px; }
+
+.planner-btn { height:24px; padding:0 8px; background-color:#7C4DFF; color:#0E0A1E;
+  border-top-left-radius:6px; border-top-right-radius:6px; border-bottom-left-radius:6px; border-bottom-right-radius:6px; }
+.planner-btn--ghost { background-color:#201748; color:#C8BEFF; }
+
+/* на всякий случай прячем гор. скролл у ListView */
+.unity-list-view__scroll-view .unity-scroll-view__horizontal-scroller { display:none; }
