@@ -2,20 +2,26 @@
   <ui:VisualElement class="modal">
     <ui:Label class="modal__title" text="Новая транзакция"/>
 
+    <!-- Ряд 1: тип + сумма + валюта -->
     <ui:VisualElement class="modal__row">
-      <ui:DropdownField name="TypeField" choices="Доход,Расход" value="Расход" />
-      <ui:TextField name="AmountField" label="Сумма" />
-      <ui:DropdownField name="CurrencyField" choices="RUB,USD,EUR" value="RUB" />
+      <ui:DropdownField name="TxType" class="field field--type" choices="Доход,Расход" value="Расход"/>
+      <ui:FloatField    name="Amount" class="field field--amount" />
+      <ui:DropdownField name="Currency" class="field field--currency" choices="RUB,USD,EUR" value="RUB"/>
     </ui:VisualElement>
 
+    <!-- Ряд 2: категория + дата -->
     <ui:VisualElement class="modal__row">
-      <ui:TextField name="CategoryField" label="Категория" />
-      <ui:TextField name="DateField" label="Дата (YYYY-MM-DD)" />
+      <ui:TextField name="Category" class="field field--category" />
+      <ui:TextField name="TxDate"   class="field field--date"     />
     </ui:VisualElement>
 
-    <ui:TextField name="NoteField" label="Комментарий" multiline="true" />
+    <!-- Ряд 3: комментарий на всю ширину -->
+    <ui:VisualElement class="modal__row">
+      <ui:TextField name="Note" class="field field--comment" multiline="true"/>
+    </ui:VisualElement>
 
     <ui:Label class="modal__hint" text="Подсказка: отрицательные суммы не нужны — типом выбираем доход/расход." />
+
     <ui:VisualElement class="modal__actions">
       <ui:Button class="modal__btn modal__btn--ghost" name="CancelBtn" text="Отмена"/>
       <ui:Button class="modal__btn" name="SaveBtn" text="Сохранить"/>

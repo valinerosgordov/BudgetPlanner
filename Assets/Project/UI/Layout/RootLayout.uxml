@@ -7,9 +7,11 @@
     <!-- TOPBAR -->
     <ui:VisualElement class="topbar">
       <ui:Label class="topbar__brand" text="Finance Planner" />
-      <ui:Button name="AddBtn" class="topbar__btn" text="＋" />
-      <ui:Button name="RatesBtn" text="Курсы" />
-      <ui:Button name="ProfileBtn" text="Профиль" />
+      <ui:VisualElement class="topbar__actions">
+        <!-- Убрали плюс из топбара -->
+        <ui:Button name="RatesBtn"   class="topbar__btn--ghost" text="Курсы" />
+        <ui:Button name="ProfileBtn" class="topbar__btn--ghost" text="Профиль" />
+      </ui:VisualElement>
     </ui:VisualElement>
 
     <!-- BODY -->
@@ -123,9 +125,14 @@
 
         </ui:VisualElement> <!-- /dashboard -->
 
-      </ui:ScrollView> <!-- ВАЖНО: закрываем именно ScrollView -->
+      </ui:ScrollView> <!-- /Content -->
 
     </ui:VisualElement> <!-- /body -->
+
+    <!-- FAB: плавающая кнопка в правом-нижнем углу -->
+    <ui:Button name="FabAdd" class="fab-add" text="＋"/>
+
+
 
     <!-- MODAL HOST (вне ScrollView) -->
     <ui:VisualElement name="ModalHost" class="modal-host"/>

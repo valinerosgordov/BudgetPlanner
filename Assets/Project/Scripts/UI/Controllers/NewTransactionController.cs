@@ -4,108 +4,125 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using FinancePlanner.Data;
 
-namespace FinancePlanner.UI
+namespace FinancePlanner.UI.Controllers
 {
     public class NewTransactionController : MonoBehaviour
     {
+        [Header("Refs")]
         [SerializeField] private UIDocument ui;
-        [SerializeField] private VisualTreeAsset newTxModal;
         [SerializeField] private DataStore data;
+        [SerializeField] private VisualTreeAsset newTxModal;   // NewTransactionModal.uxml
 
-        public event Action<Tx> OnSaved;     // cобытие на сохранение (для Планера)
+        // runtime
+        private VisualElement _root, _host, _modal;
+        private DropdownField _typeField, _currencyField;
+        private TextField _amountField, _categoryField, _dateField, _noteField;
+        private Button _btnCancel, _btnSave;
 
-        VisualElement modalHost;
+        // кнопки, открывающие модалку (чтобы корректно отписаться)
+        private Button _openAddBtn, _openFabBtn;
 
-        void Awake()
+        private void OnEnable()
         {
-            if (ui == null) ui = GetComponent<UIDocument>();
-            modalHost = ui.rootVisualElement.Q<VisualElement>("ModalHost");
+            _root = ui ? ui.rootVisualElement : null;
+            if (_root == null) { Debug.LogError("[NewTx] UIDocument/root is null"); return; }
 
-            var addBtn = ui.rootVisualElement.Q<Button>("AddBtn");
-            if (addBtn != null) addBtn.clicked += () => Open(); // глобальная кнопка "+"
+            _host = _root.Q<VisualElement>("ModalHost");
+            if (_host == null) { Debug.LogError("[NewTx] ModalHost not found in RootLayout"); return; }
+
+            _modal = newTxModal != null ? newTxModal.Instantiate() : null;
+            if (_modal == null) { Debug.LogError("[NewTx] newTxModal is null"); return; }
+            _host.Add(_modal);
+            Hide();
+
+            // поля
+            _typeField = _modal.Q<DropdownField>("TypeField");
+            _currencyField = _modal.Q<DropdownField>("CurrencyField");
+            _amountField = _modal.Q<TextField>("AmountField");
+            _categoryField = _modal.Q<TextField>("CategoryField");
+            _dateField = _modal.Q<TextField>("DateField");
+            _noteField = _modal.Q<TextField>("NoteField");
+
+            _btnCancel = _modal.Q<Button>("CancelBtn");
+            _btnSave = _modal.Q<Button>("SaveBtn");
+
+            if (_btnCancel != null) _btnCancel.clicked += Hide;
+            if (_btnSave != null) _btnSave.clicked += OnSave;
+
+            // фон — закрывает модалку
+            _host.RegisterCallback<ClickEvent>(evt =>
+            {
+                if (evt.target == _host) Hide();
+            });
+
+            // подписка на кнопки открытия — БЕЗ ?.clicked
+            _openAddBtn = _root.Q<Button>("AddBtn");
+            if (_openAddBtn != null) _openAddBtn.clicked += Show;
+
+            _openFabBtn = _root.Q<Button>("FabAdd");
+            if (_openFabBtn != null) _openFabBtn.clicked += Show;
         }
 
-        // Открыть «как новую» (опционально с предустановленной датой)
-        public void Open(DateTime? presetDate = null)
+        private void OnDisable()
         {
-            OpenInternal(null, presetDate);
+            if (_btnCancel != null) _btnCancel.clicked -= Hide;
+            if (_btnSave != null) _btnSave.clicked -= OnSave;
+
+            if (_openAddBtn != null) _openAddBtn.clicked -= Show;
+            if (_openFabBtn != null) _openFabBtn.clicked -= Show;
         }
 
-        // Открыть «редактирование» существующей транзакции
-        public void OpenForEdit(Tx existing)
+        public void Show()
         {
-            OpenInternal(existing, null);
+            if (_host == null) return;
+            _host.style.display = DisplayStyle.Flex;
+
+            if (_typeField != null) _typeField.value = "Расход";
+            if (_currencyField != null) _currencyField.value = "RUB";
+            if (_amountField != null) _amountField.value = "";
+            if (_categoryField != null) _categoryField.value = "";
+            if (_dateField != null) _dateField.value = DateTime.Today.ToString("yyyy-MM-dd");
+            if (_noteField != null) _noteField.value = "";
         }
 
-        void OpenInternal(Tx existing, DateTime? presetDate)
+        public void Hide()
         {
-            if (modalHost == null || newTxModal == null) return;
+            if (_host == null) return;
+            _host.style.display = DisplayStyle.None;
+        }
 
-            modalHost.Clear();
-            modalHost.Add(newTxModal.Instantiate());
-            modalHost.AddToClassList("is-open");
+        private void OnSave()
+        {
+            if (data == null) { Debug.LogError("[NewTx] DataStore is null"); return; }
 
-            var type = modalHost.Q<DropdownField>("TypeField");
-            var amount = modalHost.Q<TextField>("AmountField");
-            var curr = modalHost.Q<DropdownField>("CurrencyField");
-            var cat = modalHost.Q<TextField>("CategoryField");
-            var date = modalHost.Q<TextField>("DateField");
-            var note = modalHost.Q<TextField>("NoteField");
-            var cancel = modalHost.Q<Button>("CancelBtn");
-            var save = modalHost.Q<Button>("SaveBtn");
+            var type = (_typeField != null && _typeField.value == "Доход") ? TxType.Income : TxType.Expense;
 
-            // Заполняем дефолты / существующие значения
-            if (existing != null)
+            long amountCents = 0;
+            if (_amountField != null && !string.IsNullOrWhiteSpace(_amountField.value))
             {
-                type.value = existing.type == TxType.Income ? "Доход" : "Расход";
-                amount.value = (existing.amountCents / 100m).ToString(CultureInfo.InvariantCulture);
-                curr.value = existing.currency;
-                cat.value = existing.category;
-                date.value = existing.Date.ToString("yyyy-MM-dd");
-                note.value = existing.note;
-            }
-            else
-            {
-                type.value = "Расход";
-                date.value = (presetDate ?? DateTime.Today).ToString("yyyy-MM-dd");
-                curr.value = "RUB";
-            }
-
-            cancel.clicked += Close;
-
-            save.clicked += () =>
-            {
-                // Парсим сумму
-                var raw = (amount.value ?? "").Trim().Replace(" ", "").Replace(',', '.');
-                if (!decimal.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, out var dec))
+                if (decimal.TryParse(_amountField.value.Replace(" ", ""),
+                        NumberStyles.Number, CultureInfo.GetCultureInfo("ru-RU"), out var dec) ||
+                    decimal.TryParse(_amountField.value.Replace(" ", ""),
+                        NumberStyles.Number, CultureInfo.InvariantCulture, out dec))
                 {
-                    amount.value = "Ошибка";
-                    return;
+                    amountCents = (long)Math.Round(dec * 100m);
                 }
-                long cents = (long)Math.Round(dec * 100m);
+            }
 
-                // Собираем модель
-                var tx = existing ?? new Tx();
-                tx.type = (type.value == "Доход") ? TxType.Income : TxType.Expense;
-                tx.amountCents = cents;
-                tx.currency = string.IsNullOrEmpty(curr.value) ? "RUB" : curr.value;
-                tx.isoDate = DateTime.TryParse(date.value, out var dt) ? dt.ToString("yyyy-MM-dd") : DateTime.Today.ToString("yyyy-MM-dd");
-                tx.category = cat.value ?? "";
-                tx.note = note.value ?? "";
+            DateTime dt = DateTime.Today;
+            if (_dateField != null && !string.IsNullOrWhiteSpace(_dateField.value))
+                DateTime.TryParse(_dateField.value, out dt);
 
-                if (existing == null) data?.AddTx(tx);
-                else data?.UpdateTx(tx);
-
-                OnSaved?.Invoke(tx);
-                Close();
+            var tx = new Tx
+            {
+                id = Guid.NewGuid().ToString("N"),
+                type = type,
+                amountCents = amountCents,
+                isoDate = dt.ToString("yyyy-MM-dd")
             };
-        }
 
-        public void Close()
-        {
-            if (modalHost == null) return;
-            modalHost.Clear();
-            modalHost.RemoveFromClassList("is-open");
+            data.AddTx(tx);
+            Hide();
         }
     }
 }

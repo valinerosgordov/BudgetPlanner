@@ -1,9 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
+    <ui:VisualElement class="card kpi">
+    <ui:Label name="KpiBalanceValue" text="" class="kpi__value"/>
+    <ui:Label name="KpiIncomeValue"  text="" class="kpi__value"/>
+    <ui:Label name="KpiExpenseValue" text="" class="kpi__value"/>
+    <ui:Label name="KpiSavingsValue" text="" class="kpi__value"/>
 
-<!-- Assets/UI/Components/KpiCard.uxml -->
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-  <ui:VisualElement class="card kpi">
-    <ui:Label class="kpi__title" text="Заголовок" />
-    <ui:Label class="kpi__value" text="123 456 ₽" />
-    <ui:Label class="kpi__delta" text="▲ +4,2%" />
-  </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>

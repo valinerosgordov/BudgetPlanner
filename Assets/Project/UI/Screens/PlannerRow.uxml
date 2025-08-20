@@ -1,12 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
   <ui:VisualElement class="planner-row">
-    <ui:Label name="Date" class="planner-col planner-col--date" />
-    <ui:Label name="Type" class="planner-col planner-col--type" />
-    <ui:Label name="Category" class="planner-col planner-col--text" />
-    <ui:Label name="Amount" class="planner-col planner-col--amount" />
+    <ui:Label name="ColDate"   class="planner-col planner-col--date"/>
+    <ui:Label name="ColType"   class="planner-col planner-col--type"/>
+    <ui:Label name="ColText"   class="planner-col planner-col--text"/>
+    <ui:Label name="ColAmount" class="planner-col planner-col--amount"/>
     <ui:VisualElement class="planner-actions">
-      <ui:Button name="EditBtn" text="Изм." class="planner-btn" />
-      <ui:Button name="DeleteBtn" text="Удал." class="planner-btn planner-btn--ghost" />
+      <ui:Button name="EditBtn" text="✎" class="planner-btn planner-btn--ghost"/>
+      <ui:Button name="DelBtn"  text="✕" class="planner-btn"/>
     </ui:VisualElement>
   </ui:VisualElement>
 </ui:UXML>

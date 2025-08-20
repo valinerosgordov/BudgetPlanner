@@ -1,7 +1,5 @@
 ﻿using System;
 
-using UnityEngine;
-
 namespace FinancePlanner.Data
 {
     public enum TxType { Income, Expense }
@@ -9,15 +7,13 @@ namespace FinancePlanner.Data
     [Serializable]
     public class Tx
     {
-        public string id;
-        public TxType type;
-        public long amountCents;     // без плавающей точки
-        public string currency = "RUB";
-        public string isoDate;       // DateTime в ISO, чтобы сериализовалось
-        public string category;
-        public string note;
+        public string id;                 // GUID (строкой)
+        public string isoDate;            // "yyyy-MM-dd"
+        public TxType type;               // Доход / Расход
+        public long amountCents;        // сумма в копейках
 
-        public DateTime Date => DateTime.Parse(isoDate);
-        public decimal Amount => amountCents / 100m;
+        public string currency = "RUB";
+        public string category;
+        public string comment;
     }
 }

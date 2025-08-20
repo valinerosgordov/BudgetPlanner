@@ -1,11 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
   <ui:VisualElement class="dashboard">
+
     <!-- Header -->
     <ui:VisualElement class="planner-header">
       <ui:Button name="PrevMonth" text="◀" class="planner-nav"/>
-      <ui:Label name="MonthTitle" class="planner-title" text="Март 2025"/>
+      <ui:Label  name="MonthTitle" class="planner-title" text="Март 2025"/>
       <ui:Button name="NextMonth" text="▶" class="planner-nav"/>
-      <ui:Button name="AddTxBtn" text="Добавить" class="modal__btn" />
+      <ui:Button name="AddTxBtn"   text="Добавить" class="modal__btn"/>
     </ui:VisualElement>
 
     <!-- Totals -->
@@ -23,7 +24,14 @@
     <!-- List -->
     <ui:VisualElement class="card" style="margin-top:16px;">
       <ui:Label class="card__title" text="Операции"/>
-      <ui:ListView name="PlannerList" />
+      <ui:ListView
+        name="PlannerList"
+        fixed-item-height="36"
+        virtualization-method="Dynamic"
+        selection-type="None"
+        show-border="false"
+        show-alternating-row-backgrounds="None" />
     </ui:VisualElement>
+
   </ui:VisualElement>
 </ui:UXML>

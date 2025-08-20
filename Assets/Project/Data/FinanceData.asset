@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae1d05a6e7f0b045b86358fc79f3a77, type: 3}
   m_Name: FinanceData
   m_EditorClassIdentifier: 
-  openingBalanceCents: 10000000
+  openingBalanceCents: 0
   transactions: []
