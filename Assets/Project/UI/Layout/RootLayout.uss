@@ -1,6 +1,6 @@
 ﻿/* ===== CORE ================================================== */
 .root {
-  position: relative;                 /* якорь для FAB */
+  position: relative;                /* якорь для FAB */
   background-color: #0E0A1E;
   color: #EDE9FF;
   display: flex;
@@ -64,7 +64,7 @@
   width:20px; height:20px; margin-right:10px;
   -unity-background-scale-mode: scale-to-fit;
   -unity-background-image-tint-color:#C8BEFF;
-  background-color:rgba(0,0,0,0);
+  background-color:transparent;
 }
 .nav-item.is-active .nav-icon { -unity-background-image-tint-color:#0E0A1E; }
 
@@ -102,7 +102,7 @@
 .card__title { color:#C8BEFF; margin-bottom:8px; }
 .kpi__title { color:#C8BEFF; font-size:14px; }
 .kpi__value { font-size:22px; -unity-font-style:bold; color:#EDE9FF; }
-.kpi__delta { display:none; }   /* чтобы не мешали проценты */
+.kpi__delta { display:none; }   /* скрыли проценты */
 
 /* ScrollView: без горизонтального скролла */
 #Content > .unity-scroll-view__content-container { width:100%; }
@@ -110,28 +110,30 @@
 
 /* ===== PLANNER (ListView) =================================== */
 #PlannerList, .unity-list-view { width:100%; height:380px; }
-.planner-row { display:flex; flex-direction:row; align-items:center; padding:8px 6px;
-               border-bottom-width:1px; border-bottom-color:#2A2048; width:100%; }
+.planner-row {
+  display:flex; flex-direction:row; align-items:center;
+  padding:8px 6px; border-bottom-width:1px; border-bottom-color:#2A2048;
+  width:100%;
+}
 .planner-col { color:#EDE9FF; }
 .planner-col--date   { width:110px; flex:0 0 110px; color:#C8BEFF; }
 .planner-col--type   { width:80px;  flex:0 0 80px;  color:#C8BEFF; }
 .planner-col--text   { flex:1 1 auto; min-width:140px; }
 .planner-col--amount { width:120px; flex:0 0 120px; -unity-text-align: middle-right; }
-
 .unity-list-view__scroll-view .unity-scroll-view__horizontal-scroller { display:none; }
 
 /* ===== MODAL ================================================= */
 .modal-host {
   position:absolute; left:0; right:0; top:0; bottom:0;
-  display:none;
+  display:none; -unity-picking-mode: Position;
 }
 .modal-host.is-open {
   display:flex; align-items:center; justify-content:center;
   background-color:rgba(0,0,0,0.35);
+  z-index:10000;                      /* поверх FAB */
 }
-
 .modal {
-  width:720px;                      /* пошире, чтобы всё влезало */
+  width:720px;
   background-color:#1B1438;
   border-left-width:1px;  border-left-color:#2A2048;
   border-right-width:1px; border-right-color:#2A2048;
@@ -139,16 +141,15 @@
   border-bottom-width:1px;border-bottom-color:#2A2048;
   border-top-left-radius:16px; border-top-right-radius:16px;
   border-bottom-left-radius:16px; border-bottom-right-radius:16px;
-  padding:16px;
+  padding:16px; -unity-picking-mode: Position;
 }
 .modal__title { -unity-font-style:bold; font-size:16px; margin-bottom:12px; color:#EDE9FF; }
 .modal__row { display:flex; flex-direction:row; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
 .modal__row > * { margin-right:12px; }
 
-.modal .unity-label,
-.modal .unity-base-text-element { color:#EDE9FF; }
+.modal .unity-label, .modal .unity-base-text-element { color:#EDE9FF; }
 
-/* Инпуты в тёмном стиле */
+/* Инпуты */
 .modal .unity-base-field__input,
 .modal .unity-text-field__input,
 .modal .unity-float-field__input,
@@ -165,18 +166,16 @@
 }
 .modal .unity-dropdown-field__arrow { color:#C8BEFF; }
 
-/* Ширины полей */
-.field         { min-height:32px; }
-.field--type   { width:120px; flex:0 0 120px; }
-.field--amount { flex:1 1 300px; min-width:220px; }  /* тянется */
-.field--currency{ width:96px;  flex:0 0 96px; }
+/* ширины полей модалки — применять по желанию в UXML через class="field field--amount" etc */
+.field { min-height:32px; }
+.field--type     { width:120px; flex:0 0 120px; }
+.field--amount   { flex:1 1 300px; min-width:220px; }
+.field--currency { width:96px;  flex:0 0 96px; }
+.field--category { flex:1 1 360px; min-width:240px; }
+.field--date     { width:180px; flex:0 0 180px; }
+.field--comment  { flex:1 1 100%; }
 
-.field--category{ flex:1 1 360px; min-width:240px; }
-.field--date    { width:180px; flex:0 0 180px; }
-
-.field--comment { flex:1 1 100%; }
-
-/* Кнопки внизу модалки */
+/* кнопки модалки */
 .modal__actions { display:flex; flex-direction:row; justify-content:flex-end; margin-top:12px; }
 .modal__btn {
   background-color:#7C4DFF; color:#0E0A1E;
@@ -187,7 +186,7 @@
 .modal__btn--ghost { background-color:#201748; color:#C8BEFF; }
 
 /* ===== FAB (‘+’) ============================================ */
-.fab {
+.fab-add {
   position:absolute; right:24px; bottom:24px;
   width:56px; height:56px;
   background-color:#7C4DFF; color:#0E0A1E;
@@ -197,12 +196,4 @@
   font-size:22px; -unity-font-style:bold;
   z-index:10;
 }
-.fab:hover { background-color:#8A63FF; }
-
-/* фон модалки ловит клики, окно тоже кликабельно */
-.modal-host { 
-  -unity-picking-mode: Position;
-}
-.modal {
-  -unity-picking-mode: Position;
-}
+.fab-add:hover { background-color:#8A63FF; }
